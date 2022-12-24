@@ -53,9 +53,10 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
-        $q = Question::find($question);
 
-        dd($q);
+      $question->increment('views');
+
+      return view('questions.show',compact('question'));
        
     }
 
