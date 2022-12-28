@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuestionController;
+use App\Models\Question;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,10 @@ use App\Http\Controllers\QuestionController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+        
+        $questions = Question::with('user')->latest()->paginate(5);
+
+        return view('questions.index',compact('questions'));
 });
 
 Auth::routes();
