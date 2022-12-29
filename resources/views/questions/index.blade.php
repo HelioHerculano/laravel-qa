@@ -46,7 +46,7 @@
                                             {{--@endif--}}
 
                                             {{--@if(Auth::user()->can('delete-question',$question))--}}
-                                            @can('delete-question',$question))
+                                            @can('delete-question',$question)
                                             <form class="form-delete" action="{{route('questions.destroy',$question->id)}}" method="post">
                                                 @method('DELETE')
                                                 @csrf
