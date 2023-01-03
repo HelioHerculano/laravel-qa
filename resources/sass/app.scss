@@ -1,6 +1,7 @@
 // Fonts
 @import url('https://fonts.bunny.net/css?family=Nunito');
 
+
 // Variables
 @import 'variables';
 
@@ -45,4 +46,43 @@
 
 form.form-delete{
     display: inline;
+}
+
+.vote-controls{
+    min-width: 60px;
+    margin-right: 30px;
+    text-align: center;
+    color: $gray-700;
+
+    span,a{
+        display: block;
+    }
+
+    span{
+        &.votes-count{
+            font-size: 25px;
+        }
+        &.favorites-cout{
+            font-size: 12px;
+        }
+    }
+
+    a{
+        color:$gray-600;
+        cursor:pointer;
+
+        &.off,&.off:hover{
+            color:$gray-500;
+        }
+        
+        &.favorite{
+            &.favorited,&.favorited:hover{
+                color:$warning;
+            }
+        }
+
+        &.vote-accepted{
+            color:$green;
+        }
+    }
 }
