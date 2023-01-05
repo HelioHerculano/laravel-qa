@@ -4,14 +4,17 @@ namespace App\View\Components\answers;
 
 use Illuminate\View\Component;
 use App\Models\Question;
+use App\Models\Answer;
 
 class index extends Component
 {
     public $question;
+    //public $answer;
 
-    public function __construct(Question $question)
+    public function __construct(Question $question,Answer $answer)
     {
         $this->question = $question;
+       // $this->answer = $answer;
     }
 
     /**
