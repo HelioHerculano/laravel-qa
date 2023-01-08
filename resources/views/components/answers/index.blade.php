@@ -19,7 +19,7 @@
                                 </a>
                                 @can('accept',$answer)
                                     <a title="Mark this answer as best answer" 
-                                        class="{{ $answer->status }} mt-2"
+                                        class="{{ $answer->status }} mt-2"{{-- status is any acessor that i defined on model question --}}
                                         onclick="event.preventDefault(); document.getElementById('accept-answer-{{ $answer->id }}').submit();"
                                         >
                                         <i class="fa-solid fa-check fa-2x"></i>
@@ -28,8 +28,8 @@
                                         @csrf
                                     </form> 
                                     @else
-                                    @if ($answer->is_best)
-                                        <a title="Mark this answer as best answer" 
+                                    @if ($answer->is_best){{-- is_best is any acessor that i defined on model answer --}}
+                                        <a title="This answer was marked as best answer" 
                                         class="{{ $answer->status }} mt-2">
                                         <i class="fa-solid fa-check fa-2x"></i>
                                         </a>
