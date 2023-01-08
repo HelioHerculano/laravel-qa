@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\AnswersController;
+use App\Http\Controllers\AcceptAnswerController;
 use App\Models\Question;
 
 /*
@@ -30,3 +31,4 @@ Route::resource('/questions', QuestionController::class)->except('show');
 //Route::post('/question/{question}/answers',[AnswersController::class,'store'])->name('answers.store');
 Route::resource('questions.answers', AnswersController::class)->except(['index','create','show']);
 Route::get('/questions/{slug}', [QuestionController::class,'show'])->name('questions.show');
+Route::post('answers/{answer}/accept/',AcceptAnswerController::class)->name('answers.accept');
