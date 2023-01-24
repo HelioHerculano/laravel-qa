@@ -33,6 +33,7 @@
                         </form>
 
                         <span class="votes-count">{{ $question->votes_count }}</span>
+
                         <a title="This question is not useful" 
                         class="vote-down {{ Auth::guest() ? 'off' : '' }}"
                         onclick="event.preventDefault(); document.getElementById('down-vote-question-{{ $question->id }}').submit();"
@@ -45,7 +46,7 @@
                             <input type="hidden" name="vote" value="-1">
                         </form>
 
-                        <a title="Click to mark as favorite answer (Click agin to undo)" 
+                        <a title="Click to mark as favorite question (Click agin to undo)" 
                             class="favorite mt-2 {{ Auth::guest() ? 'off' : ($question->is_favorited ? 'favorited' : '') }}"
                             onclick="event.preventDefault(); document.getElementById('favorite-question-{{ $question->id }}').submit();"
                             >
