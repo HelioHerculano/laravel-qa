@@ -10,50 +10,9 @@
                     @foreach($question->answers as $answer)
                         <div class="media">
                             <div class="d-flex flex-column vote-controls">
-                                <a title="This answer is useful" 
-                                class="vote-up {{ Auth::guest() ? 'off' : '' }}"
-                                onclick="event.preventDefault(); document.getElementById('up-vote-answer-{{ $answer->id }}').submit();"
-                                >
-                                <i class="fa-solid fa-caret-up fa-3x"></i>
-                                </a>
 
-                                <form id="up-vote-answer-{{ $answer->id }}" action="/answers/{{$answer->id}}/vote" method="post" style="display: none;">
-                                    @csrf
-                                    <input type="hidden" name="vote" value="1">
-                                </form>
+                                <x-shared.vote :model="$answer" label="answer"/>
 
-                                <span class="votes-count">{{ $answer->votes_count }}</span>
-
-                                <a title="This answer is not useful" 
-                                class="vote-down {{ Auth::guest() ? 'off' : '' }}"
-                                onclick="event.preventDefault(); document.getElementById('down-vote-answer-{{ $answer->id }}').submit();"
-                                >
-                                <i class="fa-solid fa-caret-down fa-3x"></i>
-                                </a>
-
-                                <form id="down-vote-answer-{{ $answer->id }}" action="/answers/{{$answer->id}}/vote" method="post" style="display: none;">
-                                    @csrf
-                                    <input type="hidden" name="vote" value="-1">
-                                </form>
-
-                                @can('accept',$answer)
-                                    <a title="Mark this answer as best answer" 
-                                        class="{{ $answer->status }} mt-2"{{-- status is any acessor that i defined on model question --}}
-                                        onclick="event.preventDefault(); document.getElementById('accept-answer-{{ $answer->id }}').submit();"
-                                        >
-                                        <i class="fa-solid fa-check fa-2x"></i>
-                                    </a>
-                                    <form id="accept-answer-{{ $answer->id }}" action="{{ route('answers.accept',$answer->id) }}" method="post" style="display: none;">
-                                        @csrf
-                                    </form> 
-                                    @else
-                                    @if ($answer->is_best){{-- is_best is any acessor that i defined on model answer --}}
-                                        <a title="This answer was marked as best answer" 
-                                        class="{{ $answer->status }} mt-2">
-                                        <i class="fa-solid fa-check fa-2x"></i>
-                                        </a>
-                                    @endif
-                                @endcan
                             </div>
                             <div class="media-body">
                                 {!! $answer->body_html !!}
@@ -79,15 +38,7 @@
                                     </div>
                                     <div class="col-4"></div>
                                     <div class="col-4">
-                                        <span class="text-muted">Answered {{ $answer->created_date }}</span>
-                                        <div class="media mt-2">
-                                            <a href="{{$answer->user->url}}" class="pr-2">
-                                                <img src="{{$answer->user->avatar}}">
-                                            </a>
-                                            <div class="media-body mt-1">
-                                                <a href="{{ $answer->user->url }}">{{ $answer->user->name }}</a>
-                                            </div>
-                                        </div>
+                                        <x-shared.author :model="$answer" label="Answered"/>
                                     </div>
                                 </div>
                             </div>
