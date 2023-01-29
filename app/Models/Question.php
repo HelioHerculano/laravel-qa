@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use App\Models\Answer;
 use App\Traits\VotableTrait;
+use Mews\Purifier\Purifier;
 
 class Question extends Model
 {
@@ -45,7 +46,8 @@ class Question extends Model
     }
 
     public function getBodyHtmlAttribute(){
-        return \Parsedown::instance()->text($this->body);
+        //clean is purifier method
+        return clean($this->bodyHtml());
     }
 
     public function acceptBestAnswer(Answer $answer)
@@ -77,5 +79,20 @@ class Question extends Model
     public function getFavoritesCountAttribute()
     {
        return $this->favorites->count();
+    }
+
+    public function getExcerptAttribute()
+    {
+        return $this->excerpt(250);
+    }
+
+    public function excerpt($length)
+    {
+        return Str::limit( strip_tags($this->bodyHtml()),$length);
+    }
+
+    public function bodyHtml()
+    {
+        return \Parsedown::instance()->text($this->body);  
     }
 }
