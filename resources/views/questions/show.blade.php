@@ -38,7 +38,10 @@
         </div>
     </div>
     
-    <x-answers :question="$question"/>
+    @if ($question->answers_count > 0)
+        <x-answers :question="$question"/>
+    @endif
+
     <x-answers.create :question="$question"/>
 </div>
 

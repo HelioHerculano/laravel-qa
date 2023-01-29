@@ -20,12 +20,7 @@ use App\Models\Question;
 |
 */
 
-Route::get('/', function () {
-        
-        $questions = Question::with('user')->latest()->paginate(5);
-
-        return view('questions.index',compact('questions'));
-});
+Route::get('/',[QuestionController::class,'index']);
 
 Auth::routes();
 
