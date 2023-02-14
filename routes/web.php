@@ -20,9 +20,9 @@ use App\Models\Question;
 |
 */
 
-Route::get('/',[QuestionController::class,'index']);
+//Route::get('/',[QuestionController::class,'index']);
 
-Auth::routes();
+/*Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('/questions', QuestionController::class)->except('show');
@@ -35,4 +35,6 @@ Route::post('/questions/{question}/favorites',[FavoritesController::class,'store
 Route::delete('/questions/{question}/favorites',[FavoritesController::class,'destroy'])->name('questions.unfavorite');
 
 Route::post('/questions/{question}/vote',VoteQuestionController::class);
-Route::post('/answers/{answer}/vote',voteAnswerController::class);
+Route::post('/answers/{answer}/vote',voteAnswerController::class);*/
+
+Route::get('/{pathMatch}',function(){ return view('welcome'); })->where('pathMatch',".*");

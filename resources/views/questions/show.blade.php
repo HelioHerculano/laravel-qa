@@ -29,6 +29,7 @@
                             <div class="col-4"></div>
                             <div class="col-4">
                                 <x-shared.author :model="$question" label="Asked"/>
+                                <app/>
                             </div>
                         </div>
                     </div>

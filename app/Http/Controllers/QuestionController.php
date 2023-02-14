@@ -22,7 +22,17 @@ class QuestionController extends Controller
     {
         $questions = Question::with('user')->latest()->paginate(5);
 
-        return view('questions.index',compact('questions'));
+        if(!$questions):
+            return response()->json([
+                'success' => false,
+                'message' => "Not found"
+            ], 200);
+        else:
+            return response()->json([
+                'message' => "Todas as Secções",
+                'dados' => $questions
+            ], 200);
+        endif; 
     }
 
     /**
