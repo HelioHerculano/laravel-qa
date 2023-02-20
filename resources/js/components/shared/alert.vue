@@ -1,6 +1,6 @@
 <template>
-    <div class="alert alert-{{ this.type }} alert-dismissible fade show" role="alert">
-        <strong>{{ this.message }}</strong> {{ session('success') }}
+    <div class="alert alert-dismissible fade show" role="alert">
+        <strong>Alert</strong> {{ this.message }}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -13,5 +13,9 @@
                 'type',
                 'message',
               ],
+
+              mounted(){
+                console.log(this.type)
+              }
     }
 </script>

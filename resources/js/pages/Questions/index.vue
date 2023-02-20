@@ -26,6 +26,7 @@
 <script>
     import excerpt from './excerpt.vue'
     export default {
+
         components:{
             excerpt,
         },

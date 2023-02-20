@@ -1,18 +1,15 @@
 <template>
     <div>
-        <Nav/>
-        <Questions/>
+        <Nav/>      
     </div>
 </template>
 
 <script>
-    //import Nav from '../components/Nav.vue'
-    import Questions from '../Questions/index.vue'
+    import Nav from '../../components/Nav.vue'
 
 export default {
     components:{
-        //Nav,
-        Questions
+        Nav,
     }
 }
 </script>

@@ -18,12 +18,12 @@
     <div class="d-flex align-items-center">
         <h3 class="mt-0"><a href="">{{ this.model.title }}</a></h3>
         <div class="ml-auto">
-            <a href="" class="btn btn-sm btn-outline-info">Edit</a>
+            <a href="" class="btn btn-sm btn-outline-info"><i class="fa-solid fa-pen-to-square"></i></a>
 
        
                 <form class="form-delete" action="{{route('questions.destroy',$question->id)}}" method="post">
                     
-                    <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are your sure?')">Delete</button>
+                    <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are your sure?')"><i class="fa-solid fa-trash"></i></button>
                 </form>
             </div>
         </div>
@@ -33,7 +33,7 @@
                 <a href="">{{ this.model.user.name }}</a>
                 <small class="text-muted">{{ this.model.created_date }}</small>
             </p>
-            <div class="excerpt">{{ this.model.body }}</div>
+            <div class="excerpt">{{ this.body }}</div>
         </div>
 
 </div>
@@ -41,7 +41,15 @@
 
 <script>
     export default{
-        props:['model']
+        props:['model'],
+        setup() {
+            
+        },
+        computed:{
+            body(){
+                return this.model.body.substr(0,250) + '...';
+            }
+        }
     } 
 </script>
 

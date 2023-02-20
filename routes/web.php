@@ -37,4 +37,6 @@ Route::delete('/questions/{question}/favorites',[FavoritesController::class,'des
 Route::post('/questions/{question}/vote',VoteQuestionController::class);
 Route::post('/answers/{answer}/vote',voteAnswerController::class);*/
 
-Route::get('/{pathMatch}',function(){ return view('welcome'); })->where('pathMatch',".*");
+Route::get('/{pathMatch}',function(){ 
+    return view('welcome'); 
+})->where('pathMatch',".*");

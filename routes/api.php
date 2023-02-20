@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\API\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuestionController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/questions',[QuestionController::class,'index']);
+
+Route::controller(AuthController::class)->group(function(){
+    Route::post('login','login');
+});
