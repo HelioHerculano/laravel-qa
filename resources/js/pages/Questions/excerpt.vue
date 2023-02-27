@@ -5,7 +5,7 @@
     <div class="vote">
         <strong>{{ this.model.votes_count }}</strong> {{  'votes' }}
     </div>
-    <div class="status {{ this.model.status }}">
+    <div class="status answered {{ this.model.status }}">
         <strong>{{ this.model.answers_count }}</strong> {{ 'answers' }}
     </div>
 
