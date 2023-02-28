@@ -26,9 +26,9 @@
                                     <router-link class="nav-link" :to="{name: 'Register'}" v-if="$store.getters.getToken == 0">Register</router-link>
                                 </li>
                            
-                            <li class="nav-item dropdown" v-if="$store.getters.getUserData != 0">
+                            <li class="nav-item dropdown" v-if="$store.getters.getUserData[0] != 0">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{ this.$store.getters.getUserData }}
+                                    {{ this.$store.getters.getUserData[0] }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -58,9 +58,10 @@ import { useStore } from "vuex";
                 
                 store.dispatch('removeToken')
                 store.dispatch('removeUserData')
-                store.dispatch('setUserData',0)
+                store.dispatch('setUserData',[0,0])
                 //route.push({name:'Questions'})
                 //alert('active')
+                location.reload()
             }
 
             return{

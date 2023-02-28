@@ -5,7 +5,8 @@ const store = createStore({
     state:{
         //define Variables
         token : localStorage.getItem('token') || 0,
-        user:localStorage.getItem('name') || 0
+        user:localStorage.getItem('name') || 0,
+        email:localStorage.getItem('email') || 0
     },
     mutations:{
         //update variable values
@@ -14,7 +15,8 @@ const store = createStore({
         },
 
         UPDATE_USER_DATA(state,payload){
-            state.user = payload;
+            state.user = payload[0];
+            state.email = payload[1];
         }
     },
     actions:{
@@ -24,7 +26,8 @@ const store = createStore({
             context.commit('UPDATE_TOKEN',payload);
         },
         setUserData(context,payload){
-            localStorage.setItem('name',payload);
+            localStorage.setItem('name',payload[0]);
+            localStorage.setItem('email',payload[1]);
             context.commit('UPDATE_USER_DATA',payload);
         },
         removeToken(context){
@@ -33,7 +36,8 @@ const store = createStore({
         },
         removeUserData(context){
             localStorage.removeItem('name');
-            context.commit('DATE_USER_DATA',0);
+            localStorage.removeItem('email');
+            context.commit('UPDATE_USER_DATA',[0,0]);
         }
     },
     getters:{
@@ -42,7 +46,7 @@ const store = createStore({
             return state.token;
         },
         getUserData: function(state){
-            return state.user;
+            return [state.user,state.email];
         }
     }
 

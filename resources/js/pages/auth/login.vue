@@ -83,12 +83,13 @@ import alert from '../../components/shared/alert.vue'
             await axios.post('/api/login',form).then(res=>{
                 if(res.data.success){
                 store.dispatch('setToken',res.data.data.token);
-                store.dispatch('setUserData',res.data.data.name);
+                store.dispatch('setUserData',[res.data.data.name,res.data.data.email]);
                 router.push({name:'Questions'});
+                console.log(res.data.data);
                 }else{
                     
                 error.value = res.data.message;
-                //console.log(res.data.success);
+               // console.log(res.data.data.email);
                 }
             })
 
