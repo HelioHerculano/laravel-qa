@@ -13,9 +13,9 @@
                 </div>
                    
                     <div class="card-body">   
-                        <form method="post">
+                        
                             <formCreateQuestion buttonText="Ask Question"/>
-                        </form>
+                        
                     </div>
             </div>
         </div>

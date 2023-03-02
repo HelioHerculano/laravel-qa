@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Question;
 use App\Http\Requests\AskQuestionRequest;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class QuestionController extends Controller
 {
 
-    public function __construct(){
-        $this->middleware('auth',['except' => ['index','show']]);
-    }
+   // public function __construct(){
+      //  $this->middleware('auth',['except' => ['index','show']]);
+   // }
 
     /**
      * Display a listing of the resource.
@@ -51,11 +52,21 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AskQuestionRequest $request)
+    public function store(AskQuestionRequest $request, $email)
     {
-        $request->user()->questions()->create($request->only("title","body"));
+        $user = User::class::where('email','=',$email);
+        
+        $req = $user->questions()->create($request->only("title","body"));
 
-        return redirect()->route('questions.index')->with("success","Your question has been submitted");
+        /*$response = [
+            'success' => true,
+            'data' => $req,
+        ];*/
+
+       // if($req){
+            return response()->json($req,200);
+        //}
+        //return redirect()->route('questions.index')->with("success","Your question has been submitted");
     }
 
     /**
