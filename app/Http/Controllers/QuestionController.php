@@ -6,6 +6,7 @@ use App\Models\Question;
 use App\Http\Requests\AskQuestionRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends Controller
 {
@@ -52,21 +53,26 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AskQuestionRequest $request, $email)
+    public function store(AskQuestionRequest $request,$id)
     {
-        $user = User::class::where('email','=',$email);
+        $user = User::find($id);
         
-        $req = $user->questions()->create($request->only("title","body"));
+       $question = $user->questions()->create($request->only("title","body"));
 
-        /*$response = [
-            'success' => true,
-            'data' => $req,
-        ];*/
+       if($question){
+            $response = [
+                'success' => true,
+            ];
 
-       // if($req){
-            return response()->json($req,200);
-        //}
-        //return redirect()->route('questions.index')->with("success","Your question has been submitted");
+            return response()->json($response,200);
+        }
+
+        $response = [
+            'success' => false,
+        ];
+
+            return response()->json($response,401);
+        
     }
 
     /**

@@ -54,6 +54,7 @@ class AuthController extends Controller
             $success['token'] = $request->user()->createToken('MyApp')->plainTextToken;
             $success['name'] = $user->name;
             $success['email'] = $user->email;
+            $success['id'] = $user->id;
 
             $response = [
                 'success' => true,
@@ -69,5 +70,9 @@ class AuthController extends Controller
                 ];
                 return response()->json($response,200);
             }
+    }
+
+    public function getUser(){
+
     }
 }

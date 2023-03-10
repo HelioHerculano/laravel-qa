@@ -45,11 +45,9 @@
                 return this.model.body.substr(0,250) + '...';
             },
             isLogged(){
-                if(localStorage.getItem('token')){
-                    if(this.model.user.email == this.$store.getters.getUserData[1])
+                if(localStorage.getItem('user')){
+                    if(this.model.user.email == this.$store.getters.getUserData.email)
                         return true;
-                    else
-                        return false;
                 }
                 return false;
             },

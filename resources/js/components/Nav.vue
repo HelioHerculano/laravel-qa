@@ -19,16 +19,16 @@
                         <!-- Authentication Links -->
                        
                                 <li class="nav-item">
-                                    <router-link class="nav-link" to="/login" v-if="$store.getters.getToken == 0">Login</router-link>
+                                    <router-link class="nav-link" to="/login" v-if="$store.getters.getUserData.token == null">Login</router-link>
                                 </li>
                             
                                 <li class="nav-item">
-                                    <router-link class="nav-link" :to="{name: 'Register'}" v-if="$store.getters.getToken == 0">Register</router-link>
+                                    <router-link class="nav-link" :to="{name: 'Register'}" v-if="$store.getters.getUserData.token == null">Register</router-link>
                                 </li>
                            
-                            <li class="nav-item dropdown" v-if="$store.getters.getUserData[0] != 0">
+                            <li class="nav-item dropdown" v-if="$store.getters.getUserData.token != null">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{ this.$store.getters.getUserData[0] }}
+                                    {{ this.$store.getters.getUserData.name }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -56,9 +56,9 @@ import { useStore } from "vuex";
             
             const logout = () =>{
                 
-                store.dispatch('removeToken')
-                store.dispatch('removeUserData')
-                store.dispatch('setUserData',[0,0])
+                //store.dispatch('removeToken')
+                //store.dispatch('removeUserData')
+                store.dispatch('setUserData',0)
                 //route.push({name:'Questions'})
                 //alert('active')
                 location.reload()

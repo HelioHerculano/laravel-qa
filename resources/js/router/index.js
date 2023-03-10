@@ -68,7 +68,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to,from) =>{
-    if(to.meta.requiresAuth && store.getters.getToken == 0){
+    if(to.meta.requiresAuth && store.getters.getUserData.token == null){
         return { name: 'Login' }
     }
     /*if(to.meta.requiresAuth == false && store.getters.getToken != 0){

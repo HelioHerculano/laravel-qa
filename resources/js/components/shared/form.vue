@@ -1,6 +1,7 @@
 <template>
 
 <div>
+    <alert class="alert-success" message="Question maked" v-show="success"></alert>
     <form @submit.prevent="askQuestion">
         <div class="form-group">
             <label for="question-title">Question Title</label>
@@ -26,8 +27,9 @@
 </template>
 
 <script>
-import { reactive } from 'vue';
+import { reactive,ref } from 'vue';
 import { useStore } from 'vuex'
+import alert from './alert.vue';
 
     export default{
         props:{
@@ -35,7 +37,10 @@ import { useStore } from 'vuex'
         },
         setup(){
 
+            let error = ref('');
             const store = useStore();
+            let success = ref('');
+            let user={};
 
             let form = reactive({
                 title:'',
@@ -43,16 +48,33 @@ import { useStore } from 'vuex'
             })
 
            let askQuestion = async () => {
-                await axios.post(`/api/askquestion/${store.getters.getUserData[1]}`,form).then(res=>{
-                        console.log("Responsta"+res.data);
+                await axios.post(`/api/askquestion/${store.getters.getUserData.id}`,form).then(res=>{
+                        if(res.data.success){
+                            success = res.data.success
+                            console.log(success)
+                        }else{
+                            error.value = res.data.success;
+                            // console.log(res.data.data.email);
+                        }
                     })
             }
 
             return{
                 form,
-                askQuestion
+                askQuestion,
+                error,
+                success
             }
+            
+        },
+            async mounted() {
+                await axios.get('/api/user').then(res=>{
+                    console.log(res.data);
+                })
+            },
 
-        }
+            components:{
+                alert
+            }
     }
 </script>

@@ -17,18 +17,19 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    //return $request->user();
+//});
 
 //Route::get('/questions',[QuestionController::class,'index']);
 
 Route::controller(QuestionController::class)->group(function(){
     Route::get('questions','index');
-    Route::post('askquestion/{email}','store');
+    Route::post('askquestion/{user}','store');
 });
 
 Route::controller(AuthController::class)->group(function(){
     Route::post('login','login');
     Route::post('register','register');
+    Route::get('/user','getUser');
 });
