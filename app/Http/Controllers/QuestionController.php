@@ -6,7 +6,8 @@ use App\Models\Question;
 use App\Http\Requests\AskQuestionRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+//use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class QuestionController extends Controller
 {
@@ -53,25 +54,36 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AskQuestionRequest $request,$id)
+    public function store(Request $request,$id)
     {
-        $user = User::find($id);
         
-       $question = $user->questions()->create($request->only("title","body"));
+        //validation
+        $validator = Validator::make($request->only("title","body"),[
+            'title' => 'required|max:255',
+            'body' => 'required'
+        ]);
 
-       if($question){
-            $response = [
-                'success' => true,
+        if($validator->fails()){
+
+            $response =[
+                'success' => false,
+                'message' => $validator->errors()
             ];
 
             return response()->json($response,200);
         }
+        
+       $user = User::find($id);
+        
+       $user->questions()->create($request->only("title","body"));
 
-        $response = [
-            'success' => false,
-        ];
+     
+            $response = [
+                'success' => true,
+                'message' => "Asked Question"
+            ];
 
-            return response()->json($response,401);
+            return response()->json($response,200);
         
     }
 

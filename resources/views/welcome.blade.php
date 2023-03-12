@@ -4,11 +4,16 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Laravel teste</title>
 
         <!-- Fonts -->
         <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-        @vite(['resources/sass/app.scss','resources/css/app.css', 'resources/js/app.js'])
+        @vite([
+            'resources/sass/app.scss',
+            'resources/css/app.css', 
+            'resources/css/plugins/toastr/toastr.min.css' , 
+            'resources/js/app.js'
+            ])
     </head>
     <body class="antialiased">
 
@@ -120,6 +125,13 @@
                 </div>
             </div>
         </div>--}}
-        @vite('resources/js/app.js')
+        @vite([
+            'resources/js/app.js',
+            'resources/js/plugins/toastr/toastr.min.js',
+            'resources/js/vendor/global/global.min.js',
+            'resources/js/vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+            'resources/js/vendor/toastr/js/toastr.min.js',
+            'resources/js/plugins/plugins-init/toastr-init.js'
+        ])
     </body>
 </html>

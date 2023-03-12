@@ -95,7 +95,7 @@ import { useStore } from 'vuex';
                 }else{
                     
                 error.value = res.data.message;
-                console.log(error.value.name[0]);
+                console.log(res.data.message);
                 }
             })
 
